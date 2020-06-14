@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Tasks</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="userHomePage.css">
+    <script src="userHomePage.js"></script>
+    <link rel="icon" href="planicon.ico">
+  </head>
+  <body>
+    <img src="logo3.png" class="logo" >
+    <div class="navBar">
+        <nav class="nav nav-pills nav-justified">
+           <!--<a class="userHome"  style="text-decoration: none; color: #fff;" href="/userhomepage">Hey<br>
+                <span class="userName"><%= name %></span>! </a> !-->
+                <form name='form10' action="/userhomepage" method="post" class="userHome">
+                  <input type="hidden"  name="email" value=<%= em %>>
+                  <input type="hidden"  name="pwd" value=<%= pw %>>
+                  <input type="hidden"  name="name" value=<%= name %>>
+                  <input type="hidden"  name="title" value=null>
+                  <input type="hidden" name="ddate" value=null>
+                  <input type="hidden"  name="lab" value=null>
+                  <input type="hidden"  name="stat" value=null>
+                  <a href="javascript:document.form10.submit()" style="text-decoration: none; color: #fff;">Hey<br>
+                       <span class="userName"><%= name %></span>! </a>
+                </form>
+        </nav>
+    </div>
+    <div class="sideBar">
+      <form name='form11' action="/usertasks" method="post" class="components">
+        <input type="hidden"  name="email" value=<%= em %>>
+        <input type="hidden" name="pwd" value=<%= pw %>>
+        <input type="hidden" name="name" value=<%= name %>>
+        <a href="javascript:document.form11.submit()">My Tasks</a>
+      </form>
+      <form name='form12' action="/archive" method="post" class="components">
+        <input type="hidden"  name="email" value=<%= em %>>
+        <input type="hidden"  name="pwd" value=<%= pw %>>
+        <input type="hidden"  name="name" value=<%= name %>>
+        <a href="javascript:document.form12.submit()">Archive</a>
+      </form>
+      <a class="components" id="returnhome" style="text-decoration: none; color: #fff;" href="/home">Logout</a>
+    </div>
+    <div class="addTask">
+    <div class="toDoList">
+        <form ng-submit="taskAdd()" action="taskeditfinal" method="post">
+            <input type="text" ng-model="taskInput" name="title" size="20" class="txt" value="<%= title.split("_").join(" ") %>">
+            <input value=<%= ddate %> ng-model="taskDate" name="ddate" class="txt" type="text" onfocus="(this.type='date')" id="Date">
+            <br><br>
+            <label for="lab">Choose a label:</label>
+            <select  ng-model="taskLabel"name="lab">
+              <option value="Personal">Personal</option>
+              <option value="Work">Work</option>
+              <option value="Shopping">Shopping</option>
+              <option value="Others">Others</option>
+            </select><br><br>
+            <label for="stat">Choose the status:</label>
+            <select name="stat">
+              <option value="New">New</option>
+              <option value="In Progress">In progress</option>
+              <option value="Completed">Completed</option>
+            </select><br><br>
+            <input type="hidden"  name="email" value=<%= em %>>
+            <input type="hidden" name="pwd" value=<%= pw %>>
+            <input type="hidden"  name="name" value=<%= name %>>
+            <input type="hidden" name="oldtitle" value="<%= title.split("_").join(" ") %>">
+            <input type="hidden" name="olddate" value=<%= ddate %>>
+            <input type="hidden" name="oldlabel" value="<%= lab.split("_").join(" ") %>">
+            <input type="hidden" name="oldstat" value="<%= stat.split("_").join(" ") %>">
+            <input type="submit" class="btn" value="Submit Changes">
+        </form>
+      </div>
+      </div>
+  </body>
+</html>

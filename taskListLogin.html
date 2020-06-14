@@ -1,0 +1,37 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="taskListLogin.css">
+        <link rel="icon" href="planicon.ico">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="registersc.js"></script>
+        <title>Login</title>
+    </head>
+    <body>
+        <div class="navBar">
+            <nav class="nav nav-pills nav-justified">
+                <a class="nav-link" href="/home">Home</a>
+                <a class="nav-link active" href="/login">Login</a>
+                <a class="nav-link" href="/register">Register</a>
+                <img src="logo3.png" class="logo" >
+            </nav>
+        </div>
+        <form action="/login" method="post">
+            <div class="container">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" name="pass" class="form-control" id="exampleInputPassword1" required>
+                    <input type="checkbox" class="chkbx2" onclick="clickfun()"><label id="l1">Show password</label></input>
+                </div>
+                <div>
+                    <button type="submit" onclick="clkfun()" class="btn btn-primary">Login</button>
+                    <small class="registration-link">New member?   <a href="/register" style="text-decoration: none;">Register</a></small>
+                  <!--  <small class="registration-link-forgot-pswrd"><a href="#" style="text-decoration: none;">Forgot password</a></small> !-->
+                </div>
+            </div>
+        </form>
+    </body>
+</html>

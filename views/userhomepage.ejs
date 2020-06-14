@@ -1,0 +1,91 @@
+<html>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="userHomePage.css">
+        <script src="userHomePage.js"></script>
+        <link rel="icon" href="planicon.ico">
+        <title>My Homepage</title>
+    </head>
+    <script>
+        function myFunction() {
+          var t=document.getElementById("t1");
+          var d=document.getElementById("d1");
+          var l=document.getElementById("l1");
+          var s=document.getElementById("s1");
+          if(t!=null && d!=null && l!=null && s!=null){
+             document.getElementById("snackbar").style.display="block";
+             setTimeout(function(){
+               document.getElementById("snackbar").style.display="none";
+             },190000);
+          }
+        }
+    </script>
+    <body ng-app="taskList" ng-controller="taskCtrl">
+      <img src="logo3.png" class="logo" >
+        <div class="navBar">
+            <nav class="nav nav-pills nav-justified">
+              <form name='form8' action="/userhomepage" method="post" class="userHome">
+                <input type="hidden"  name="email" value=<%= em %>>
+                <input type="hidden"  name="pwd" value=<%= pw %>>
+                <input type="hidden"  name="name" value=<%= name %>>
+                <input type="hidden"  name="title" value=null>
+                <input type="hidden" name="ddate" value=null>
+                <input type="hidden"  name="lab" value=null>
+                <input type="hidden"  name="stat" value=null>
+                <a href="javascript:document.form8.submit()" style="text-decoration: none; color: #fff;">Hey<br>
+                     <span class="userName"><%= name %></span>! </a>
+              </form>
+          <!--      <a class="nav-link" id="returnHome1" style="text-decoration: none; color: #fff;" href="/home">Logout<i class="fa">&#xf08b;</i></a> !-->
+            </nav>
+        </div>
+        <div class="sideBar">
+          <form name='form1' action="/usertasks" method="post" class="components">
+            <input type="hidden" name="email" value=<%= em %>>
+            <input type="hidden"  name="pwd" value=<%= pw %>>
+            <input type="hidden"  name="name" value=<%= name %>>
+            <a href="javascript:document.form1.submit()">My Tasks</a>
+          </form>
+          <form name='form2' action="/archive" method="post" class="components">
+            <input type="hidden"  name="email" value=<%= em %>>
+            <input type="hidden"  name="pwd" value=<%= pw %>>
+            <input type="hidden"  name="name" value=<%= name %>>
+            <a href="javascript:document.form2.submit()">Archive</a>
+          </form>
+          <a class="components" id="returnhome" style="text-decoration: none; color: #fff;" href="/home">Logout</a>
+        </div>
+        <div class="addTask" >
+            <a>Add Your Task Here</a>
+            <div class="toDoList">
+                <form ng-submit="taskAdd()" action="userHomePage" method="post">
+                <!--    <input type="text" ng-model="taskNo" name="num" size="1" class="txt" placeholder="Enter the task number"> !-->
+                    <input type="text" ng-model="taskInput" id="t1"name="title" size="20" class="txt" placeholder="Add new task here" required>
+                    <input placeholder="Due Date" ng-model="taskDate" id="d1" name="ddate" class="txt" type="text" onfocus="(this.type='date')" id="Date"required>
+                    <br><br>
+                    <label for="lab">Choose a label:</label>
+                    <select name="lab" id="l1"required>
+                      <option value="Personal">Personal</option>
+                      <option value="Work">Work</option>
+                      <option value="Shopping">Shopping</option>
+                      <option value="Others">Others</option>
+                    </select><br><br>
+                    <label for="stat">Choose the status:</label>
+                    <select name="stat" id="s1" required>
+                      <option value="New">New</option>
+                      <option value="In Progress">In progress</option>
+                      <option value="Completed">Completed</option>
+                    </select><br><br>
+                    <input type="hidden"  name="email" value=<%= em %>>
+                    <input type="hidden" name="pwd" value=<%= pw %>>
+                    <input type="hidden"  name="name" value=<%= name %>>
+                    <input type="submit" class="btn" onclick="myFunction()" value="Add New">
+                    <div id="snackbar">
+                       <p>✔ New task Added</p>
+                    </div>
+                </form>
+              </div>
+        </div>
+    </body>
+</html>

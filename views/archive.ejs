@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Archive</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="userHomePage.css">
+    <link rel="icon" href="planicon.ico">
+    <script src="userHomePage.js"></script>
+  </head>
+  <body>
+    <img src="logo3.png" class="logo" >
+    <div class="navBar">
+        <nav class="nav nav-pills nav-justified">
+          <form name='form9' action="/userhomepage" method="post" class="userHome">
+            <input type="hidden"  name="email" value=<%= em %>>
+            <input type="hidden" name="pwd" value=<%= pw %>>
+            <input type="hidden" name="name" value=<%= name %>>
+            <input type="hidden"  name="title" value=null>
+            <input type="hidden"  name="ddate" value=null>
+            <input type="hidden"  name="lab" value=null>
+            <input type="hidden"  name="stat" value=null>
+            <a href="javascript:document.form9.submit()" style="text-decoration: none; color: #fff;">Hey<br>
+                 <span class="userName"><%= name %></span>! </a>
+          </form>
+        </nav>
+    </div>
+    <div class="sideBar">
+      <form name='form5' action="/usertasks" method="post" class="components">
+        <input type="hidden"  name="email" value=<%= em %>>
+        <input type="hidden"  name="pwd" value=<%= pw %>>
+        <input type="hidden" name="name" value=<%= name %>>
+        <a href="javascript:document.form5.submit()">My Tasks</a>
+      </form>
+      <form name='form7' action="/archive" method="post" class="components">
+        <input type="hidden"  name="email" value=<%= em %>>
+        <input type="hidden"  name="pwd" value=<%= pw %>>
+        <input type="hidden"  name="name" value=<%= name %>>
+        <a href="javascript:document.form7.submit()">Archive</a>
+      </form>
+      <a class="components" id="returnhome" style="text-decoration: none; color: #fff;" href="/home">Logout</a>
+    </div>
+    <div class="heading">
+      <h3 class="headtext">Archive</h3>
+    </div>
+    <div id="taskno">
+      <p id="tasknotext">Number of  archived tasks :
+         <%= arch.length %>
+       </p>
+    </div>
+    <div class="checkBox">
+    <% if(arch.length==0) { %>
+      <span class="emptytask"style="color: white;">You have no archived tasks.</span>
+    <% } %>
+    <ul>
+    <% arch.forEach(function(ar) { %>
+        <!--<input type="checkbox" id="chkBx" ng-model="x.done"> !-->
+      <li>  <span ng-bind="x.taskText" style="color: #FAFAFA;"><%= ar.title %></span> </li>
+        <span ng-bind="x.taskDate" style="color: #FAFAFA;" class="date">Due by : <%= ar.ddate %></span>
+        <!--<button ng-click="remove($index)" class="deleteTask"><a>x</a></button> !-->
+        <br><br>
+        <span  ng-bind="x.taskLabel" style="color: #FAFAFA;" class="tasklabel">Label : <%= ar.label %></span>
+        <span  ng-bind="x.taskStatus"style="color: #FAFAFA;" class="taskStatus">Status : <%= ar.status %></span>
+        <br><br>
+        <form  action="/archdel" method="post">
+          <input type="hidden"  name="email" value=<%= em %>>
+          <input type="hidden"  name="pwd" value=<%= pw %>>
+          <input type="hidden"  name="name" value=<%= name %>>
+          <input type="hidden" name="title" value=<%= ar.title.split(" ").join("_") %>>
+          <input type="hidden" name="date" value=<%= ar.ddate %>>
+          <input type="hidden" name="lab" value=<%= ar.label.split(" ").join("_") %>>
+          <input type="hidden" name="status" value=<%= ar.status.split(" ").join("_") %>>
+          <button type="submit" name="ardel" class="button5">Delete</button>
+        </form>
+        <form  action="/armove" method="post">
+          <input type="hidden"  name="email" value=<%= em %>>
+          <input type="hidden"  name="pwd" value=<%= pw %>>
+          <input type="hidden"  name="name" value=<%= name %>>
+          <input type="hidden" name="title" value=<%= ar.title.split(" ").join("_") %>>
+          <input type="hidden" name="date" value=<%= ar.ddate %>>
+          <input type="hidden" name="lab" value=<%= ar.label.split(" ").join("_") %>>
+          <input type="hidden" name="status" value=<%= ar.status.split(" ").join("_") %>>
+          <button type="submit" name="armove" class="button6">Move to My Tasks</button>
+        </form>
+      <br><br>
+    <% }); %>
+  </ul>
+    </div>
+  </body>
+</html>
