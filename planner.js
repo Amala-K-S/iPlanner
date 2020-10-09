@@ -4,7 +4,7 @@ const express=require('express');
 const path=require("path");
 const bodyParser = require("body-parser");
 const MongoClient = require('mongodb').MongoClient;
-const uri="mongodb+srv://admin-amala:Smash1551@cluster0-yzaqe.mongodb.net/iplannerDB?retryWrites=true&w=majority";
+const uri="mongodb+srv://admin-amala:***********-yzaqe.mongodb.net/iplannerDB?retryWrites=true&w=majority";
 const assert = require('assert');
 let ejs=require('ejs');
 const app=express();
